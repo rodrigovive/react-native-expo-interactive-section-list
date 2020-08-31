@@ -1,16 +1,16 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from "react";
 import {
   View,
   SectionList,
   Text,
   StyleSheet,
   ImageSourcePropType,
-} from 'react-native';
-import sectionListGetItemLayout from 'react-native-section-list-get-item-layout';
+} from "react-native";
+import sectionListGetItemLayout from "react-native-section-list-get-item-layout";
 
-import ScrollableTabbar from './ScrollableTabbar';
+import ScrollableTabbar from "./ScrollableTabbar";
 
-import { contentViewStyles as styles } from './styles';
+import { contentViewStyles as styles } from "./styles";
 
 interface Props {
   data: Array<any>;
@@ -43,10 +43,10 @@ const getData = (items: Array<any>) => {
 
   const sectionList: Array<any> = items.map((section, index) => {
     section.data.forEach((sectionItem: any) => {
-      if (typeof sectionItem === 'object') {
+      if (typeof sectionItem === "object") {
         sectionItem.sectionIndex = index;
         flattenedList.push(sectionItem);
-      } else if (typeof sectionItem === 'string') {
+      } else if (typeof sectionItem === "string") {
         const obj = { title: sectionItem, sectionIndex: index };
         flattenedList.push(obj);
       }
@@ -95,7 +95,7 @@ const SelectableSectionList: React.FC<Props> = ({
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [firstIndexInView, setFirstIndexInView] = useState<number>(0);
   const [isManualSelect, setIsManualSelect] = useState<boolean>(false);
-  const [scrollDirection, setScrollDirection] = useState<string>('DOWN');
+  const [scrollDirection, setScrollDirection] = useState<string>("DOWN");
 
   const [sectionHeaderHeight, setSectionHeaderHeight] = useState<number>(40);
   const [layoutHeight, setLayoutHeight] = useState<number>(0);
@@ -132,7 +132,7 @@ const SelectableSectionList: React.FC<Props> = ({
     setSectionsFeed(listObject.sectionList);
     setFlattenedList(listObject.flattenedList);
     setTabbarItems(getTabbarItems(listObject.sectionList));
-  }, []);
+  }, [data]);
 
   const renderFlatlist = () => (
     <SectionList
@@ -175,9 +175,9 @@ const SelectableSectionList: React.FC<Props> = ({
 
         // SET SCROLLDIRECTION
         if (nativeEvent.contentOffset.y > scrollOffset) {
-          setScrollDirection('DOWN');
+          setScrollDirection("DOWN");
         } else {
-          setScrollDirection('UP');
+          setScrollDirection("UP");
         }
         scrollOffset = nativeEvent.contentOffset.y;
       }}
@@ -197,7 +197,7 @@ const SelectableSectionList: React.FC<Props> = ({
         onPress={(index: number) => handleTabItemPress(index)}
         selectedIndex={selectedIndex}
         firstValueInView={
-          data[firstIndexInView] ? data[firstIndexInView].title : ''
+          data[firstIndexInView] ? data[firstIndexInView].title : ""
         }
         isManualSelect={isManualSelect}
         scrollDirection={scrollDirection}
